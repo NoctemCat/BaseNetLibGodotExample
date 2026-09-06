@@ -1,8 +1,8 @@
 # Initial LibGodot Demo 
 Shows the basic LibGodot usage. I tried to contain everything LibGodot specific to the `project/LibGodot` folder,
-which is kind of huge, but thankfully largely self contained. And as it is kind of pain to write this repo is MIT-0.
+which is kind of huge, but thankfully largely self contained. And as it is kind of pain to write, this repo is MIT-0.
 
-Allows you to export LibGodot export template from a normal C# mono editor.
+Also allows you to export LibGodot export template from a normal C# mono editor.
 
 ## Godot preparations
 In `godot` folder:
@@ -28,7 +28,8 @@ dotnet publish -c ExportRelease -p:BuildLibGodot=true
 `project/nuget.config` adds it as a source so a `.csproj` can find it
 
 ## xUnit.net
-Needs `disable_path_overrides=no`, only supports testing on export templates either with `--main-pack <file>` or with `--script <script>`
+Needs `disable_path_overrides=no`, only supports testing on export templates either with `--main-pack <file>` or with `--script <script>`.
+Also the repo uses `template_debug`.
 In `project/LobGodotXUnit` folder:
 - Edit package path and the shared library path in `LibGodotXUnit.csproj`.
 ```
