@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ResourceData" format=3 uid="uid://dpj08nl4ttlc5"]
+
+[ext_resource type="PackedScene" uid="uid://bf234y75sfx4t" path="res://Main.tscn" id="1_pj150"]
+[ext_resource type="Script" uid="uid://cgr2x8kb1m1p2" path="res://ResourceData.cs" id="1_tl5t0"]
+
+[resource]
+script = ExtResource("1_tl5t0")
+Table = Dictionary[int, String]({
+55: "Hello",
+101: "World"
+})
+SceneExport = ExtResource("1_pj150")
+metadata/_custom_type_script = "uid://cgr2x8kb1m1p2"
