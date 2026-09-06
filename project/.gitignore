@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+LibGodot/template/*
+export
+.nuget
+bin
+obj

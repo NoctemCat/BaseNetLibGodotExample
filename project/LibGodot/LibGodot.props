@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup Condition=" $(BuildLibGodot) == 'true' ">
+    <OutputType>exe</OutputType>
+    <LibGodotEnabled>true</LibGodotEnabled>
+    <LibGodotDisableMain>false</LibGodotDisableMain>
+    <LibGodotCopyLib>true</LibGodotCopyLib>
+    <EnableDynamicLoading>false</EnableDynamicLoading>
+    <PublishDir>$(MSBuildProjectDirectory)/LibGodot/template</PublishDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(LibGodotEnabled) == 'true' ">
+    <DefineConstants>$(DefineConstants);LIBGODOT_ENABLED</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Needs unsafe. -->
+  </PropertyGroup>
+  <PropertyGroup Condition=" $(LibGodotDisableMain) == 'true' ">
+    <DefineConstants>$(DefineConstants);LIBGODOT_DISABLE_MAIN</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" $(LibGodotCopyLib) == 'true' ">
+    <Content Include="$(MSBuildProjectDirectory)/../godot/bin/libgodot.linuxbsd.template_release.x86_64.so" >
+      <Link>libgodot.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="LibGodotXUnit" />
+  </ItemGroup>
+</Project>

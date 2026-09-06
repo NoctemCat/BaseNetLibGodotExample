@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b5jqy2hom5pel"]
+
+[ext_resource type="Script" uid="uid://dtlrw88f8ky0i" path="res://Slot2d.cs" id="1_p8dto"]
+[ext_resource type="Texture2D" uid="uid://c3shxi1bkk0pm" path="res://icon.svg" id="2_nt4ny"]
+
+[node name="Slot" type="Node2D" unique_id=872409537]
+script = ExtResource("1_p8dto")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1308340291]
+texture = ExtResource("2_nt4ny")

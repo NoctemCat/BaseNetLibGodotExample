@@ -1,0 +1,4 @@
+[submodule "godot"]
+	path = godot
+	url = https://github.com/NoctemCat/godot.git
+	branch = dotnet_base_libgodot

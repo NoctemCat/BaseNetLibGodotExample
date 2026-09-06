@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d3rbpv65iuj4y"]
+
+[ext_resource type="Script" uid="uid://bxp7bryg8kxcj" path="res://Scene2d.cs" id="1_sj7fy"]
+[ext_resource type="PackedScene" uid="uid://b5jqy2hom5pel" path="res://Slot2D.tscn" id="2_p1cag"]
+
+[node name="Node2D" type="Node2D" unique_id=651534855 node_paths=PackedStringArray("slots")]
+script = ExtResource("1_sj7fy")
+slots = [NodePath("Slot"), NodePath("Slot2"), NodePath("Slot3"), NodePath("Slot4")]
+
+[node name="Slot" parent="." unique_id=872409537 instance=ExtResource("2_p1cag")]
+position = Vector2(42, 126)
+
+[node name="Slot2" parent="." unique_id=542995341 instance=ExtResource("2_p1cag")]
+position = Vector2(235, 164)
+
+[node name="Slot3" parent="." unique_id=1615736423 instance=ExtResource("2_p1cag")]
+position = Vector2(448, 159)
+
+[node name="Slot4" parent="." unique_id=250720611 instance=ExtResource("2_p1cag")]
+position = Vector2(655, 151)

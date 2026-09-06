@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://vyf0rj3hmsf2"]
+
+[ext_resource type="Script" uid="uid://c7fvyai802yhu" path="res://CustomRigidbody.cs" id="1_gk6bx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pa54t"]
+albedo_color = Color(0.24840015, 0.24840018, 0.24840015, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pa54t"]
+material = SubResource("StandardMaterial3D_pa54t")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pa54t"]
+
+[node name="Node3D" type="RigidBody3D" unique_id=1944283393]
+script = ExtResource("1_gk6bx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1822266455]
+mesh = SubResource("SphereMesh_pa54t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1255326162]
+shape = SubResource("SphereShape3D_pa54t")

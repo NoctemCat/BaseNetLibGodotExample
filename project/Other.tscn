@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://cqxxoy6tajuhl"]
+
+[ext_resource type="PackedScene" uid="uid://cwofe2y70tg0" path="res://Player.tscn" id="1_nwyol"]
+[ext_resource type="PackedScene" uid="uid://vyf0rj3hmsf2" path="res://Ball.tscn" id="2_nvqpt"]
+[ext_resource type="Script" uid="uid://wn2768fe216p" path="res://MovePlayer.cs" id="3_nvqpt"]
+[ext_resource type="PackedScene" uid="uid://d3rbpv65iuj4y" path="res://Scene2d.tscn" id="4_shs5s"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_uu6xs"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_glv2v"]
+data = PackedVector3Array(50, -50, 0, -50, -50, 0, 50, 50, 0, -50, -50, 0, -50, 50, 0, 50, 50, 0)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glv2v"]
+sky_top_color = Color(0.5634183, 0.31855017, 0.13570216, 1)
+sky_horizon_color = Color(0.57248735, 0.46730024, 0.3762169, 1)
+sky_energy_multiplier = 0.89
+energy_multiplier = 1.07
+
+[sub_resource type="Sky" id="Sky_uu6xs"]
+sky_material = SubResource("ProceduralSkyMaterial_glv2v")
+
+[sub_resource type="Environment" id="Environment_uu6xs"]
+background_mode = 2
+sky = SubResource("Sky_uu6xs")
+
+[sub_resource type="BoxMesh" id="BoxMesh_glv2v"]
+size = Vector3(5.293701, 2.6889648, 1.5498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uu6xs"]
+size = Vector3(5.293701, 2.6889648, 1.5498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvqpt"]
+size = Vector3(5.293701, 2.6889648, 2.8193665)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm0pq"]
+transparency = 1
+blend_mode = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_nvqpt"]
+material = SubResource("StandardMaterial3D_cm0pq")
+size = Vector3(5.513672, 2.798767, 1.4960938)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glv2v"]
+albedo_color = Color(1.4078245e-06, 0.40900773, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0du0"]
+size = Vector3(5.293701, 0.70965576, 1.5498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0du0"]
+size = Vector3(5.293701, 0.70965576, 1.5498657)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu6xs"]
+albedo_color = Color(0, 0.40784314, 0.57254905, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cm0pq"]
+size = Vector3(11.05249, 1.6744232, 1.5498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fos0i"]
+size = Vector3(11.05249, 1.6744232, 1.5498657)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0du0"]
+albedo_color = Color(0.3180198, 0.31801978, 0.31801975, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fos0i"]
+size = Vector3(15.012085, 2.6889648, 1.5498657)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glv2v"]
+size = Vector3(15.012085, 2.6889648, 1.5498657)
+
+[node name="Node3D" type="Node3D" unique_id=2034346259]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1965319674]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_uu6xs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=676734299]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=354295998]
+shape = SubResource("ConcavePolygonShape3D_glv2v")
+
+[node name="Player" parent="." unique_id=1055758282 node_paths=PackedStringArray("BoidesArray", "BoidesGodotArray", "NodeArray") instance=ExtResource("1_nwyol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3015628, 0)
+BallScene = ExtResource("2_nvqpt")
+BoidesArray = [NodePath("../Bodies/Node3D"), NodePath("../Bodies/Node3D2"), NodePath("../Bodies/Node3D3"), NodePath("../Bodies/Node3D4")]
+BoidesGodotArray = [NodePath("../Bodies/Node3D"), NodePath("../Bodies/Node3D2"), NodePath("../Bodies/Node3D3"), NodePath("../Bodies/Node3D4")]
+NodeArray = [NodePath("../Bodies/Node3D"), NodePath("../Bodies/Node3D2"), NodePath("../Bodies/Node3D3"), NodePath("../Bodies/Node3D4")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=123811198]
+environment = SubResource("Environment_uu6xs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1403928240]
+transform = Transform3D(1, 0, 0, 0, 0.26483253, 0.96429443, 0, -0.96429443, 0.26483253, 0, 5.188054, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=588539773 node_paths=PackedStringArray("area3D")]
+transform = Transform3D(0.5941772, 0, -0.80433404, 0, 1, 0, 0.80433404, 0, 0.5941772, -5.589713, 1.7601786, 4.806789)
+mesh = SubResource("BoxMesh_glv2v")
+script = ExtResource("3_nvqpt")
+PathToLevel = "uid://bf234y75sfx4t"
+area3D = NodePath("Area3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=591169583]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1716240555]
+shape = SubResource("BoxShape3D_uu6xs")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D2" unique_id=857105253]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Area3D" unique_id=1496635553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.63475037)
+shape = SubResource("BoxShape3D_nvqpt")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D2" unique_id=683536715]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -0.07650399, 0.00088500977, -1.3392944)
+mesh = SubResource("BoxMesh_nvqpt")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1976220109]
+transform = Transform3D(-0.357928, 0, -0.9337492, 0, 1, 0, 0.9337492, 0, -0.357928, 16.305586, 0.770524, -0.35515624)
+material_override = SubResource("StandardMaterial3D_glv2v")
+mesh = SubResource("BoxMesh_r0du0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4" unique_id=1915805414]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D" unique_id=1994308921]
+shape = SubResource("BoxShape3D_r0du0")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=929355141]
+transform = Transform3D(0.7471372, 0, -0.6646699, 0, 1, 0, 0.6646699, 0, 0.7471372, 12.765878, 1.2529078, -5.9064875)
+material_override = SubResource("StandardMaterial3D_uu6xs")
+mesh = SubResource("BoxMesh_cm0pq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5" unique_id=439235703]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D" unique_id=808768097]
+shape = SubResource("BoxShape3D_fos0i")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1942960834]
+transform = Transform3D(-0.9855826, 0, -0.16919467, 0, 1, 0, 0.16919467, 0, -0.9855826, 1.3959427, 1.7601786, -8.242377)
+material_override = SubResource("StandardMaterial3D_r0du0")
+mesh = SubResource("BoxMesh_fos0i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3" unique_id=1751932138]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D" unique_id=1309096654]
+shape = SubResource("BoxShape3D_glv2v")
+
+[node name="Bodies" type="Node3D" parent="." unique_id=1728192527]
+
+[node name="Node3D" parent="Bodies" unique_id=1944283393 instance=ExtResource("2_nvqpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.439951, 1.4567318, 0.044426918)
+
+[node name="Node3D2" parent="Bodies" unique_id=712410875 instance=ExtResource("2_nvqpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5959501, 3.7833276, 9.619723)
+
+[node name="Node3D3" parent="Bodies" unique_id=860562174 instance=ExtResource("2_nvqpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.703382, -4.446969)
+
+[node name="Node3D4" parent="Bodies" unique_id=2078130247 instance=ExtResource("2_nvqpt")]
+transform = Transform3D(-0.995445, 0, -0.09533724, 0, 1, 0, 0.09533724, 0, -0.995445, -7.900514, 2.414043, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=906084674]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2132064620]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(387, 146)
+render_target_update_mode = 4
+
+[node name="Node2D" parent="SubViewportContainer/SubViewport" unique_id=651534855 instance=ExtResource("4_shs5s")]
+scale = Vector2(0.5, 0.5)
