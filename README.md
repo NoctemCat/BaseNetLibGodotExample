@@ -37,3 +37,28 @@ dotnet test -c ExportDebug
 ```
 Currently there is no plans to add editor support for testing as the editor LibGodot still needs to be able to reload assemblies, and
 it works through loading the C# project fully from memory. Double loading here is a feature.
+
+## Editor LibGodot, for some reason
+This section is for people who like to write bootstrap code by themselves. It's not really recommended.
+
+You should prefer to rely on the normal built in loading in editor, it will do everything for you by itself. Example:
+```C#
+internal unsafe static nint GetPluginInitialize()
+{
+#if TOOLS
+    // Use builtin dotnet loading for editor.
+    return (nint)(void*)null;
+#else
+    // Use default loader for the export build.
+    return (nint)(delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, Godot.NativeInterop.godot_bool>)&global::GodotPlugins.Game.Main.InitializeFromGameProject;
+#endif
+}
+```
+If you still want to load it, you will need to load `InitializeFromEngine` function from the type `GodotPlugins.Main, GodotPlugins`
+and return it. It should be located in `GodotSharp/Api/Debug/GodotPlugins.dll`. In a normal build you can use `Assembly.LoadFile`,
+but in NativeAOT you will need to do the whole [native host thing](https://learn.microsoft.com/en-us/dotnet/core/tutorials/netcore-hosting)
+to load it. As you can see the editor C# doesn't support NativeAOT, even if the loader uses it.
+
+Also `GodotPlugins` will then load the Debug build of your current project from the memory, and yes, it will cause double loading,
+there is basically nothing else to do if you want to still make it possible to support assembly reloading. So, once again, 
+I don't recommend Editor LibGodot.
