@@ -21,20 +21,40 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace LibGodot.Bridge
 {
     internal static partial class Initializer
     {
+        [UnmanagedCallersOnly]
+        static Godot.NativeInterop.godot_bool InitializeGameProject(IntPtr godotDllHandle, IntPtr outManagedCallbacks, IntPtr unmanagedCallbacks, int unmanagedCallbacksSize)
+        {
+            try
+            {
+                DllImportResolver dllImportResolver = new Godot.NativeInterop.GodotDllImportResolver(godotDllHandle).OnResolveDllImport;
+                var coreApiAssembly = typeof(global::Godot.GodotObject).Assembly;
+                NativeLibrary.SetDllImportResolver(coreApiAssembly, dllImportResolver);
+                Godot.NativeInterop.NativeFuncs.Initialize(unmanagedCallbacks, unmanagedCallbacksSize);
+                Godot.Bridge.ManagedCallbacks.Create(outManagedCallbacks);
+                Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(typeof(global::GodotPlugins.Game.Main).Assembly);
+                return Godot.NativeInterop.godot_bool.True;
+            }
+            catch (Exception e)
+            {
+                global::System.Console.Error.WriteLine(e);
+                return Godot.NativeInterop.GodotBoolExtensions.ToGodotBool(false);
+            }
+        }
+
         internal unsafe static nint GetPluginInitialize()
         {
-            // Console.WriteLine("LoadFromExecutable called");
 #if TOOLS
             // Use builtin dotnet loading for editor.
             return (nint)(void*)null;
 #else
-            // Use default loader for the export build.
-            return (nint)(delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, Godot.NativeInterop.godot_bool>)&global::GodotPlugins.Game.Main.InitializeFromGameProject;
+            // Use the "default" loader for the export build.
+            return (nint)(delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, Godot.NativeInterop.godot_bool>)&InitializeGameProject;
 #endif
         }
 

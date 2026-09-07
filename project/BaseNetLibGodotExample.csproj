@@ -4,8 +4,21 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Needs unsafe. -->
     <DefaultItemExcludes>$(DefaultItemExcludes);LibGodotXUnit\**</DefaultItemExcludes>
+    <!-- <PublishAot>true</PublishAot> -->
   </PropertyGroup>
+
+  <PropertyGroup Condition=" $(BuildLibGodot) == 'true' And $(PublishAot) == 'true' ">
+    <TrimMode>partial</TrimMode>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <LinkStandardCPlusPlusLibrary>true</LinkStandardCPlusPlusLibrary>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" $(BuildLibGodot) == 'true' And $(PublishAot) == 'true' ">
+    <TrimmerRootAssembly Include="GodotSharp" />
+    <TrimmerRootAssembly Include="$(TargetName)" />
+  </ItemGroup>
 
   <Import Project="./LibGodot/LibGodot.props" />
 </Project>
