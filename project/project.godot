@@ -24,6 +24,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="BaseNetLibGodotExample"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/DisableNativeExport/plugin.cfg")
+
 [gui]
 
 common/auto_focus_strategy=1

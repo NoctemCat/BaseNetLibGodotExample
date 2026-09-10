@@ -17,7 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" $(LibGodotCopyLib) == 'true' ">
-    <Content Include="$(MSBuildProjectDirectory)/../godot/bin/libgodot.linuxbsd.template_release.x86_64.so" >
+    <Content Include="$(MSBuildProjectDirectory)/../godot/bin/libgodot.linuxbsd.template_release.x86_64.so" Condition=" $(Configuration) == 'ExportRelease' " >
+      <Link>libgodot.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup Condition=" $(LibGodotCopyLib) == 'true' ">
+    <Content Include="$(MSBuildProjectDirectory)/../godot/bin/libgodot.linuxbsd.template_debug.x86_64.so" Condition=" $(Configuration) == 'ExportDebug' " >
       <Link>libgodot.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
